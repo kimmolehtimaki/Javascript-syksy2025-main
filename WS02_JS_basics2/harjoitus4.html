@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    <title>My Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+
+<body>
+    <h1>Workshop 2</h1>
+    <h2 id="nimi"></h2>
+    <p id = "text"></p>
+    
+    <script>
+    //määritetään funktio nimen kysymiselle ja kirjoitetaan se <h2> elementtiin
+    function askName(){
+    let name = prompt("Mikä sinun nimesi on?");
+    let h2 = document.getElementById("nimi");
+
+    h2.textContent = "Hei " + name + "!";
+    }
+
+	askName();
+
+    //kysytään opiskelijastatus itseään kutsuvalla funktiolla
+        (function studentStatus() {
+    let status = "Oletko opiskelija?";
+    let textEl = document.getElementById("text")
+   
+    if (confirm(status) == true) {
+        textEl.innerHTML = "Tervetuloa opiskelija!";
+    } else {
+        textEl.innerHTML = "Valitettavasti tämä sivu on tarkoitettu vain opiskelijoille";
+    }
+})();
+    </script>
+
+    
+
+</body>
+
+</html>

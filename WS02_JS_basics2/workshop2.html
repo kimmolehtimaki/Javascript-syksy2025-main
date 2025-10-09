@@ -19,7 +19,10 @@
 	}
 </style>
 <!-- SCRIPT TÄGIN VOIT KIRJOITTAA TÄHÄN -->
+<script>
+// document.write("<strong><em>\"\If I had nine hours to chop down a tree, I'd spend the first six	sharpening my ax.\"\</em></strong><br><br><em>-Abraham Lincoln</em>");
 
+</script>
 <body>
 
 	<h1>Työpaja 2: JavaScript BOM & DOM</h1>
@@ -47,10 +50,26 @@
 
 	<p>Luo JavaScript-funktio nimeltä <code>repeatingText</code>, joka kirjoittaa saman rivin tekstiä sivulle 50 kertaa.
 	</p>
+<!-- function repeatingText(){
+    for (let i=0; i < 50; i++){
+    document.write("Hei maailma!")
+    }
+}
+	repeatingText();
+ -->
+
 
 	<p><strong>Bonus:</strong> kysy käyttäjältä toistojen määrä <a
 			href="https://developer.mozilla.org/en-US/docs/Web/APIrompt">prompt-ikkunalla</a>.</p>
-
+<!-- function repeatingText(){
+    
+    let lkm = prompt("Montako kertaa?");
+    for (let i=0; i < lkm; i++){
+    document.write("Hei maailma!")
+    }
+}
+	repeatingText();
+ -->
 	<h2>Harjoitus 3 - Selaimen tunnistaminen</h2>
 
 	<p>Luo JavaScriptillä <code>if</code>-lause, joka tarkistaa, käyttääkö käyttäjä Mozilla-selainta. Jos käyttää,
@@ -61,12 +80,41 @@
 		on
 		helpointa etsiä haluttua
 		hakusanaa <code>contains</code>-funktiolla.
+		let browserInfo = navigator.appVersion;
+
+<!--//contains-funktio palauttaa true/false//
+	function contains(browser, search) {
+    //The indexOf() method returns -1 if the value is not found//
+	return browser.indexOf(search) !== -1;
+}
+let browserInfo = navigator.appVersion;
+
+if (contains(browserInfo, "Mozilla")) {
+    window.location.href = "http://www.mozilla.org";
+} else {
+    window.location.href = "http://www.google.fi";
+} -->
 	<p><strong>Bonus:</strong> ennen ohjausta näytä käyttäjälle alert-ikkunalle tiedote: " You are using
 		Firefox,
 		redirecting you...".</p>
 
+	<!-- function contains(browser, search) {
+    return browser.indexOf(search) !== -1;
+}
+let browserInfo = navigator.appVersion;
+
+if (contains(browserInfo, "Mozilla")) {
+    alert("You are using Firefox, redirecting you to mozilla.org")
+    window.location.href = "http://www.mozilla.org";
+} else {
+    window.location.href = "http://www.google.fi";
+} -->
+
 	<p><strong>Pohdiskelu:</strong> miksi selain-tunnistus voi olla epäluotettavaa ja miksi "Feature detection"
 		on usein parempi.</p>
+<!-- Selainten eri versioissa saattaa olla eri lailla tietoja "User Agentissa". Esim. Chrome 101, lähtien tietomäärää on pienennetty (https://blog.chromium.org/2021/05/update-on-user-agent-string-reduction.html
+). Näin ollen kaikilla käyttäjillä ei välttämättä ole samoja selainversioita tai eri selaimet päivittyvät eri tahtiin.
+Feature detection takaisi sen, että sivu toimii kaikilla käyttäjillä  -->
 
 	<h2>Harjoitus 4</h2>
 
@@ -98,7 +146,14 @@
 		<code>images[0]</code> sisältää URL-osoitteen:<br>
 		<code>http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg</code>
 	</p>
+<!-- ("<img src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Male_silverback_Gorilla.JPG'>");
+ const images = [
+  "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+  "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+  "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg",
+];
 
+document.write('<img src="'+ images[0]+'">'); -->
 	<p>Kun olet valmis, kirjoita JavaScript-funktio, joka näyttää satunnaisen kuvan seuraavasta kuvalistasta.
 	</p>
 
@@ -110,6 +165,15 @@ Math.floor(Math.random() * 5);
 
 // Tai voit käyttää suoraan taulukon kokoa
 Math.floor(Math.random() * images.length);
+
+<!-- const images = ["http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg", "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg", "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg",];
+
+//valitaan satunnainen kuva
+let randomPic = Math.floor(Math.random() * images.length);
+let image = images[randomPic];
+
+//tulostetaan kuva
+document.write("<img src='"+ image +"'>"); -->
 </code></pre>
 
 </body>
