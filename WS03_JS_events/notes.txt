@@ -1,0 +1,12 @@
+let nappi = document.querySelector('button')
+nappi.addEventListener('click', function(){ alert('Hoi maailma!); })
+
+let t =document.getElementById('example')
+
+t = "<table>"
+
+t+==document.getElementById('example').innerHTML
+
+t+=document.getElementById('example').innerHTML;
+
+document.write(t)

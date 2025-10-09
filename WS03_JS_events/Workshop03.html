@@ -1,3 +1,4 @@
+<!-- Tehty tehtävät 1, 2 ja 3 kokonaan (3. tehtävä ilman bonusta) -->
 <!DOCTYPE html>
 <html lang="fi">
 
@@ -5,22 +6,33 @@
     <meta charset="utf-8">
     <title>Työpaja 3</title>
     <link rel="stylesheet" href="css/styles.css">
+
     <script>
-        <!-- JavaScript menee tänne -->
+        //ratkaisu tehtävään 1.2, ratkaisu toteutettu ilman `-merkkejä
+        function showTable() {
+        let taulu = document.getElementById('example');
+        taulu = "<table>";
+            taulu+=document.getElementById('example').innerHTML;
+            document.write(taulu);
+        }
+        
     </script>
 </head>
 
 <body class="ws3">
+    
     <h1>Työpaja 3: JavaScript-tapahtumat</h1>
     <hr />
     <p>Tässä harjoituksessa harjoittelemme JavaScript-tapahtumien käyttöä. Käytä luentomateriaalia rinnakkain näiden
         harjoitusten kanssa. On myös hyvä idea tallentaa kirjoittamasi koodirivit myöhempää käyttöä varten.</p>
     <hr />
-    <h2>Harjoitus 1</h2>
+    <h2 id="otsikko">Harjoitus 1</h2>
     <p>Alla näet kolme painiketta. Muokkaa lähdekoodia ja lisää näihin painikkeisiin onClick-tapahtumat.</p>
     <p>
-        <button>Napsauta minua</button>
-        <button>Näytä taulukko</button>
+        <!-- //ratkaisu tehtävään 1.1 -->
+        <button onclick = "alert('Klikkasit minua!')">Napsauta minua</button>
+        <button onclick = "showTable()">Näytä taulukko</button>
+
     </p>
     <div id="taulukonPaikka"></div>
     <ol>
@@ -69,7 +81,8 @@
     </table>
 
     <hr />
-    <h2>Harjoitus 2</h2>
+    <!-- ratkaisu tehtävään 2.1 -->
+    <h2 onmouseover = 'console.log("Stepped over my mouse!")' onmouseout="console.log('Off')">Harjoitus 2</h2>
     <ul>
         <li>Lisää onMouseOver-tapahtuma otsikkoon "Harjoitus 2". Tapahtuman pitäisi aktivoitua, kun hiiri siirtyy
             otsikon
@@ -106,11 +119,11 @@
     <form>
         <textarea id="textdata"></textarea><br>
         <span id="charcount"></span>
-        <button>Lähetä</button>
+        <button onclick="emptyform()">Lähetä</button>
     </form>
     <hr />
     <h2>Harjoitus 4</h2>
-    <div id="coordinates">Lorem ipsum</div>
+    <div id="coordinates"></div>
     <p>Lisää onMouseMove-tapahtuma yllä olevaan DIV-elementtiin. Kun liikutat
         hiirtä DIVin (suorakulmion) päällä, ohjelman pitäisi tulostaa kohdistimen
         koordinaatit.
@@ -133,6 +146,43 @@
         `https://www.google.com/maps?q=LATITUDE,LONGITUDE`
     <p>Bonus: Miten voisi käsitellä tilanteen, jossa sijainti ei
         ole saatavilla?
+    <script>
+        //ratkaisu tehtävään 2.2
+        let otsikko = document.querySelector("#otsikko");
+        otsikko.addEventListener("click", function () {
+        otsikko.style.color = "red";
+        otsikko.innerHTML = "Bye bye mouse!";
+        });
+        
+        //ratkaisu tehtävään 3.1 ja 3.2
+        const textarea = document.getElementById("textdata");
+        const info = document.getElementById("charcount");
+        const output = document.getElementById("charcount");
+
+        let keyPresses = 0;
+        textarea.addEventListener("keydown", function () {
+        keyPresses++;
+        output.textContent = keyPresses;
+        });
+
+        textarea.onfocus = function () {
+        info.textContent = "Please fill in the form with proper data.";
+        textarea.style.backgroundColor = "red";
+        };
+
+        //ratkaisu tehtävään 3.3
+        function emptyform() {
+            document.getElementById("textdata");
+
+            if (textarea.value === "") {
+                alert("Tekstialue on tyhjä!");
+        }
+            else {
+                alert("Lomake lähetetty!");
+            }
+        }
+
+    </script>
 </body>
 
 </html>
