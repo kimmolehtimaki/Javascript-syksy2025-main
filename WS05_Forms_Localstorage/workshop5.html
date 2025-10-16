@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <title>Workshop 5</title>
     <link rel="stylesheet" href="css/styles.css">
+
+<!-- Tehtävä 4b ratkaisu: lataa tiedot sivulle heti kun sivu ladataan -->
+    <script>
+        window.onload = function() {
+            const nimiTallennettu = localStorage.getItem("nimi");
+            const mailTallennettu = localStorage.getItem("mail");
+            const kommenttiTallennettu = localStorage.getItem("kommentti");
+
+            const sessionDiv = document.querySelector("#sessiondata");
+        }
+    </script>
 </head>
 
 <body>
@@ -43,22 +54,23 @@
     <p data-line="12">d) Bonus: Jos jonkun kentän kohdalla tapahtuu virhe, korosta virheellinen kenttä esim. punaisella
         reunalla ja anna käyttäjälle palautetta näyttämällä ilmoitus lomakkeella syötekentän vieressä olevassa &lt;span>
         -kentässä.</p>
-    <form onsubmit="">
+    <form onsubmit="sendForm(event)">
+
         <div class="no-border">
             <label>Name:<br>
-                <input type="text" name="name"><span id="name"></span>
+                <input type="text" id="name"><span id="name"></span>
             </label>
         </div>
         <div class="no-border">
             <label>Email address:<br>
-                <input type="text" name="email"><span id="email"></span>
+                <input type="text" id="email"><span id="email"></span>
             </label>
         </div>
         <div class="no-border">
             <label>
                 Comment:<br>
             </label>
-            <textarea name="comment"></textarea><span id="comment"></span>
+            <textarea id="comment"></textarea><span id="comment"></span>
         </div>
         <br>
         <input type="submit" value="Send">
@@ -131,6 +143,9 @@
 
         </p>
         <div id="sessiondata">Session data goes here!</div>
+        <!-- Ladataan localStoragen tiedot kun käyttäjä lähettää lomakkeen -->
+        
+        
     </div>
     <hr />
     <div>
@@ -143,7 +158,74 @@
             F12 → Application-välilehti → vasemmalta valitse LocalStorage tai SessionStorage.</p>
     </div>
     <hr />
+<script>
+// tehtävän 1 ratkaisu. Lisätty myös tehtävän 3 tallenusratkaisut
+    function sendForm(e) {
+        // estetään lomakkeen lähetys ja sivun uudelleen lataus
+        e.preventDefault();
+        let nimi = document.querySelector("#name").value;
+        localStorage.setItem("nimi", nimi); //tallennetaan kentän arvo localstorageen
+        // tehdään nimi-kentän validointi
+        if (nimi.trim() === '') {
+            alert("Nimi ei saa olla tyhjä");
+            return true;
+        }
+//tehdään sähköpostiosoitteen validointi
+        let mail = document.querySelector("#email").value;
+        localStorage.setItem("email", mail); //tallennetaan kentän arvo localstorageen
+        if (mail.length <= 6 || mail.length >= 15) {
+            alert("Email tulee olla yli 6 ja alle 15 merkkiä pitkiä");
+            return;
+        }
+        if (!mail.includes("@")) {
+            alert("Sähköpostiosoitteessa tulee olla @-merkki");
+            return;
+        } 
 
+//tehdään kommenttikentän validointi
+        let kommentti = document.querySelector("#comment").value;
+        localStorage.setItem("kommentti", kommentti);  // tallennetaan kentän arvot localstorageen
+        if (kommentti.length < 1 || kommentti.length > 149) {
+            alert("Kommenttikentässä tulee olla 1-149 merkkiä");
+            return;
+        }
+
+//alert-ikkunaan arvot
+        alert(nimi + "\n" +mail + "\n" +kommentti);
+        }
+
+    // tehtävän 2 ratkaisu: Luodaan funktio, laskuri ja estetään lomakkeen lähetys
+    document.forms["theForm"].onsubmit = function(event) {
+        event.preventDefault();
+        const laskuri = document.forms["theForm"];
+    //haetaan jäsenyyden hinta ja vuosien määrä
+        const jasenyys = laskuri.type.value;
+        const vuodet = laskuri.years.value;
+        let hinta = jasenyys * vuodet;
+        // alennukset
+        if (vuodet > 2 && vuodet < 5) {
+            hinta = 0.8 * hinta;
+        }
+        if (vuodet >= 5) {
+            hinta = 0.8 * hinta - 5;
+            alert("Kiitos pitkästä sitoumuksesta hintaan laskettu ylimääräinen 5 eur alennus!");
+        }
+        //lasketaan hinta "cost" -kenttään
+        laskuri.cost.value = hinta + " Euroa";
+    }
+    
+//tehtävän 4 ratkaisu: tallennetaan localstoragen tiedot sessionStorageen
+
+    const nimiTallennettu = localStorage.getItem("nimi");
+    const mailTallennettu = localStorage.getItem("email");
+    const kommenttiTallennettu = localStorage.getItem("kommentti");
+
+    document.querySelector("#sessiondata").innerHTML = `
+    Name: ${nimiTallennettu}<br>
+    Email address: ${mailTallennettu}<br>
+    Comment: ${kommenttiTallennettu}<br>`;
+       
+</script>
 </body>
 
 </html>
