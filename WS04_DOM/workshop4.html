@@ -6,32 +6,7 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="css/styles.css" />
 </head>
-<script>
-	function changeHeading() {
-		let ekanappi = document.querySelectorAll("h1")[0].innerHTML = "Muokattu otsikko!";
-	}
- 
-	function secondButton() {
-		let tokanappi = document.querySelectorAll("h2")[1];
-		tokanappi.style.fontSize = "30px";
-		tokanappi.style.color = "white";
-		tokanappi.style.backgroundColor = "black";
-		tokanappi.style.fontStyle = "italic";
-	}
 
-	function thirdButton() {
-		let kolmasnappi = document.querySelectorAll("em")[1];
-		kolmasnappi.innerHTML = "Tämä on itse valitsemani teksti!";
-		document.querySelectorAll("em")[1] =  "Uutta tekstiä on lisätty!";
-	}
-
-	function valitseAuto() {
-		let malli = document.getElementById("mySelect").value;
-		alert("Valitsit automallin: " + malli);
-
-		// document.QuerySelector("#carimage").src = "tähän linkki";
-	}
-</script>
 <body>
 	<hr />
 	<h1 id="otsikko">Työpaja 4</h1>
@@ -44,6 +19,8 @@
 		<button onclick="changeHeading();">Painike 1</button>
 		<button onclick="secondButton()">Painike 2</button>
 		<button onclick="thirdButton()">Painike 3</button>
+		<button onclick="fourthButton()">Bonus 1</button>
+		<button onclick="fifthButton()">Bonus 2</button>
 	</p>
 
 	<ul>
@@ -94,7 +71,9 @@
 		</li>
 	</ul>
 	<p>Valitse uusi auto listasta.</p>
-	<select name="mySelect" id="mySelect" onchange="">
+	<select name="mySelect" id="mySelect" onchange="selectCar()">
+		<!-- en saanut BMW:n kohdalla kuvaa aluksi vaihtumaan, joten lisäsin tyhjän valinnan alkuun ja koitin ratkaista ongelmaa sitä kautta-->
+		<option	value="" disabled selected>Valitse automerkki</option>
 		<option value="BMW">BMW</option>
 		<option value="Audi">Audi</option>
 		<option value="Mercedes">Mercedes</option>
@@ -102,9 +81,9 @@
 	</select>
 	<br />
 	<br />
-	<img alt="Auto" onmouseover="" onmouseout="" style="left: 0px; opacity: 1"
+	<img alt="Auto" id="carimage" onmouseover="hoverCar()" style="left: 0px; opacity: 1"
 		src="https://www.bmw.fi/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/navigation/bmw-8series-coupe-modellfinder.png"
-		width="400" id="carimage" />
+		width="400"/>
 
 
 	<hr />
@@ -138,7 +117,9 @@
 	Palkka:
 	<input type="text" name="textfield3" id="palkka" />
 	<br /><br>
-	<input type="button" name="Insert" id="Insert" value="Lisää" />
+	<input type="button" name="Insert" id="insert" value="Lisää" />
+	<!-- Luodaan erillinen nappi rivien poistamiseen taulukosta. -->
+	 <input	type="button" name="Delete" id="remove" value="Poista" />
 	</p>
 	<table id="data" class="display" border="1">
 		<thead>
@@ -232,6 +213,123 @@
 			&lsquo;Select&rsquo;?
 		</li>
 	</ul>
+
+	<script>
+	//Tehtävän yksi (+bonukset) ratkaisut
+	function changeHeading() {
+		let ekanappi = document.querySelectorAll("h1")[0].innerHTML = "Muokattu otsikko!";
+	}
+ 
+	function secondButton() {
+		let tokanappi = document.querySelectorAll("h2")[1];
+		tokanappi.style.fontSize = "30px";
+		tokanappi.style.color = "white";
+		tokanappi.style.backgroundColor = "black";
+		tokanappi.style.fontStyle = "italic";
+	}
+
+	function thirdButton() {
+		let kolmasnappi = document.getElementById("lorem");
+		kolmasnappi.innerHTML = "Tämä on itse valitsemani teksti!";
+		let toinenKolmasnappi = document.querySelectorAll("em")[0]; 
+		toinenKolmasnappi.innerHTML = " Uutta tekstiä on lisätty!";
+	}
+
+	// Bonus-1 tehtävä
+	function fourthButton() {
+		let neljasnappi = document.getElementById("lorem");
+		neljasnappi.innerHTML += " Tässä lisätty tekstiä bonus1-tehtävän mukaisesti.";
+	}
+
+	//Bonus 2-tehtävä
+	function fifthButton() {
+		document.body.style.backgroundColor = "lightblue";
+	}
+
+	//Tehtävän 2 ratkaisut
+	function selectCar() {
+		//muuttuja auton mallille
+		let malli = document.getElementById("mySelect").value;
+				
+		alert("Valitsit automallin: " + malli);
+		// Vaihdetaan kuva valitun merkin mukaiseksi, lisätty alt-attribuutti eri kuville
+		if (malli === "BMW") {
+		document.querySelector("#carimage").src = "https://www.bmw.fi/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/navigation/bmw-8series-coupe-modellfinder.png";
+		} else if (malli === "Audi") {
+			document.querySelector("#carimage").src = "https://media.audi.com/is/image/audi/country/fi/assets/uusi-q3/Q3_laatikko_etusivu_734x412.jpg?width=660&auto=webp";
+		} else if (malli === "Mercedes") {
+			document.querySelector("#carimage").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Mercedes-Benz_W214_1X7A1841.jpg/1280px-Mercedes-Benz_W214_1X7A1841.jpg";
+		} else if (malli === "Volvo") {
+			document.querySelector("#carimage").src = "https://wizz.volvocars.com/images/2026/256/exterior/studio/threeQuartersFrontLeft/exterior-studio-threeQuartersFrontLeft_04B6D1DEFB3647C113695D488F01693407B46BA2.png?client=car-configurator&bg=fafafa&w=384";
+		}
+	}
+		
+	function hoverCar() {
+		//muuttuja auton kuvalle
+		let kuva = document.getElementById("carimage");
+	
+		//lisätään kuuntelija "mouseover"-tapahtumalle
+		kuva.addEventListener("mouseover", function() {
+		kuva.style.border =  "2px solid green";
+		});
+		//lisätään kuuntelija "mouseout"-tapahtumalle
+		kuva.addEventListener("mouseout", function() {
+		kuva.style.border = "none";		
+		});		
+	}
+
+	//Tehtävän 3 ratkaisut
+	document.getElementById("insert").addEventListener("click", function() {
+		//määritetään muuttuja lomakkeen kenttien arvoille
+		let nimi = document.getElementById("nimi").value;
+		let tehtava = document.getElementById("tehtava").value;
+		// muunnetaan kentän string-arvo numeroksi
+		let palkka = parseFloat(document.getElementById("palkka").value);
+		
+		// validoitaan kenttien arvot
+		if (nimi.length <= 5) {
+			alert("Nimen tulee olla yli 5 merkkiä pitkä.");
+			return;
+		}
+		if (tehtava.trim() === "") {
+			alert("Tehtävä-kenttä ei saa olla tyhjä.");
+			return;
+		}
+		// käytetään "isNaN"-funktiota validoimaan että palkka on numero
+		if (palkka <= 0 || isNaN(palkka)) {
+			alert("Palkan tulee olla suurempi kuin 0 ja kentän tulee sisältää vain numeroita.");
+			return;
+		}
+		//lisätään täytetty lomake uutena rivinä taulukkoon, ensin haetaan taulukko
+		let taulukko = document.getElementById("data");
+		//lisätään tyhjä rivi taulukon loppuun
+		let luoRivi = taulukko.insertRow(taulukko.length);
+		// lisätään käyttäjän syöttämät arvot soluihin
+		let solu1 = luoRivi.insertCell(0);
+		let solu2 = luoRivi.insertCell(1);
+		let solu3 = luoRivi.insertCell(2);
+		solu1.innerHTML = nimi;
+		solu2.innerHTML = tehtava;
+		solu3.innerHTML = "$" + palkka.toLocaleString("fi-FI"); // fi-FI pitäisi antaa tuhateroittimen välilyöntinä
+	});
+
+	// Tehtävä 3 bonus: rivien poistaminen taulukon lopusta
+	document.getElementById("remove").addEventListener("click", function() {
+		// haetaan taulukko
+		let taulukko = document.getElementById("data");
+		//tarkastetaan että taulukossa on otsikoiden lisäksi ainakin yksi rivi (=indeksi [1])
+		if (taulukko.rows.length <= 1) {
+			alert("Taulukossa ei ole rivejä poistettavaksi");
+			return;
+		}
+		else {
+			taulukko.deleteRow(-1); //poistaa viimeisen rivin
+		}
+	});
+	
+	
+
+</script>
 </body>
 
 </html>
