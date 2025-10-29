@@ -327,7 +327,51 @@
 		}
 	});
 	
+	// Bonus-tehtävä: Siirrä elementtejä
 	
+	// etsitään elementti tunnisteen id="carimage"
+	function changePosition() {
+		let siirra = document.querySelector("#carimage");
+		siirra.style.position = "absolute"; //määritetään kuvan CSS-asettelu jotta kuva siirtyy
+		siirra.style.left =  "200px";
+		siirra.style.bottom = "500px";
+	}
+	
+	// Bonus-2: napin painallus siirtää kuvaa näytön poikki
+	// määritetään auton sijainti vaakasuunnassa
+	let x = 0;
+	
+	function doMove() {
+		let animoi = document.querySelector("#carimage");
+		// kuvan CSS-asettelu, jotta saadaan kuva siirtymään
+		animoi.style.position = "absolute";
+		// määritetään arvo, johon auto pysähtyy sekä liikkuminen 100px-välein
+		if (x < window.innerWidth - 50) {
+		x = x + 100;
+		animoi.style.left = x + "px";
+		}
+	}
+
+	// Bonus-3: napin painallus pienentää opacity arvoa kunnes kuva häviää
+	let y = 1;
+
+	function fadeOut() {
+		let haivyta = document.querySelector("#carimage");
+		// määritetään if-lauseke
+		if (haivyta.style.opacity >= 0) {
+			y = y - 0.05;
+			haivyta.style.opacity = y;
+		}
+	}
+
+	// Bonus-4: napin painallus poistaa img-elementin sivulta
+
+	function remove() {
+		let element = document.querySelector("#carimage");
+		element.remove();
+	}
+	
+
 
 </script>
 </body>
