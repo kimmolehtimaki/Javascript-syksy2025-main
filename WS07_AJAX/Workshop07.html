@@ -18,8 +18,8 @@
 	<p>JSON tarkoittaa JavaScript Object Notationia, ja se tarkoittaa, että esittelemme datan muodossa, jonka JavaScript
 		ymmärtää sellaisenaan. Muunnoksia ei tarvita sen käyttämiseen.</p>
 	<p>
-		<button>Näytä vain etu- ja sukunimi</button>
-		<button>Näytä kaikki tiedot</button>
+		<button id="getNames">Näytä vain etu- ja sukunimi</button>
+		<button id="getAllData">Näytä kaikki tiedot</button>
 	</p>
 	<p>Kokeillaan seuraavaa. Voit luoda uuden JSON-datasetin JavaScript-koodissasi alla olevan mallin mukaisesti. Luo
 		sitten funktiot, jotka suoritetaan, kun painikkeita klikataan.</p>
@@ -41,7 +41,7 @@
 	<p>Alla näet kaksi painiketta. Muokkaa lähdekoodia ja lisää näihin painikkeisiin onClick-tapahtumat. Lisää
 		toiminnallisuudet alla kuvatulla tavalla.</p>
 	<p>
-		<button>Lataa raaka data</button>
+		<button onclick="downloadRawData();">Lataa raaka data</button>
 		<button>Lataa ja parsi data</button>
 	</p>
 
@@ -86,6 +86,9 @@
 	<p>Tai kirjoita hakusana: <input id="citysearch" /><button id="search">Hae</button></p>
 	<div id="weatherdata">Säätiedot näkyvät täällä.</div>
 
+	<script src="script.js"></script>
+		
+	
 </body>
 
 </html>
