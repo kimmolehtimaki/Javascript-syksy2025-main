@@ -69,7 +69,7 @@
 		Klikkaa nähdäksesi vastauksen.</p>
 	<ul>
 		<li>Kehitä ensin sovellus, joka näyttää raakatiedot säästä (lämpötila, pilvisyys, ilmankosteus) tietyssä
-			kaupungissa, kun painiketta klikataan. <button>Hae data</button></li>
+			kaupungissa, kun painiketta klikataan. <button onclick="fetchRawWeather();">Hae Lontoon data</button></li>
 		<li>Kun tämä toimii, parsi data ja tulosta se diviin.</li>
 		<li>Tämän jälkeen lisää onchange-tapahtuma pudotusvalikkoon, jotta käyttäjä voi valita, minkä kaupungin tiedot
 			näytetään listalta.</li>
@@ -77,7 +77,8 @@
 			OpenWeatherMap API:lle ja jonka tulokset näytetään sovelluksessa.</li>
 	</ul>
 	<p>Valitse kaupunki listalta:</p>
-	<select name="mySelect" id="city" onchange="">
+	<select name="mySelect" id="city" onchange="selectCity()">
+		<option	value="" disabled selected>Valitse kaupunki</option>
 		<option value="Helsinki">Helsinki</option>
 		<option value="Stockholm">Tukholma</option>
 		<option value="Rome">Rooma</option>
