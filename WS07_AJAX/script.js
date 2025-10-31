@@ -150,10 +150,10 @@ function selectCity() {
                                 </tr>
                                 <tr>
                                     <td>${jsonwe.name}</td>
-                                    <td>${jsonwe.main.temp}</td>
+                                    <td>${Math.round(jsonwe.main.temp)}°C</td> Math.round()-funktio pyöristämiseen
                                     <td>${jsonwe.weather[0].description}</td>
                                     <td>${jsonwe.main.humidity}%</td>
-                                    <td><img src="https://openweathermap.org/img/w/${jsonwe.weather[0].icon}.png></td>
+                                    <td><img src="https://openweathermap.org/img/w/${jsonwe.weather[0].icon}.png"></td>
                                     
                                 </tr>
                                 </table>`;
