@@ -48,7 +48,7 @@ function parseRawXml() {
 // Oma funktio joka poimii datat
 function parseData(xmlDoc) {
     let temp = xmlDoc.getElementsByTagName("temperature")[0].getAttribute("value");
-    let clouds = xmlDoc.getElementsByTagName("clouds")[0].getAttribute("value");
+    let clouds = xmlDoc.getElementsByTagName("clouds")[0].getAttribute("name");
     let humidity = xmlDoc.getElementsByTagName("humidity")[0].getAttribute("value");
     let tableHTML = `
         <table border="1">
