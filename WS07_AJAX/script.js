@@ -163,3 +163,54 @@ function selectCity() {
             } //if päättyy
         }
     };
+
+    //haku search-kentän kautta
+    //määritetään muuttujat
+    const searchInput = document.getElementById("citysearch");
+    const searchBtn = document.getElementById("search");
+
+    //lisätään dynaaminen kuuntelija
+    searchBtn.addEventListener("click", function() {
+        const searchQuery = searchInput.value;
+
+        var xmlhttp = new XMLHttpRequest();
+        //dynaaminen määritys haku URL:lle
+        const urlSearch = `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&lang=fi&units=metric&mode=JSON&APPID=2d45a57e705bccf0e859e32fcfc0a798`;
+
+        xmlhttp.open("GET", urlSearch, true);
+        xmlhttp.send();
+
+        //vastauksen käsittelijä
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                const jsonwe = JSON.parse(xmlhttp.responseText);
+                
+                //Math.round()-funktio pyöristämiseen
+                const table = `
+                                <table border="1">
+                                <tr>
+                                    <th>Kaupunki</th>
+                                    <th>Lämpötila</th>
+                                    <th>Säätila</th>
+                                    <th>Ilman kosteus</th>
+                                    <th>Ikoni</th>
+                                </tr>
+                                <tr>
+                                    <td>${jsonwe.name}</td>
+                                    <td>${Math.round(jsonwe.main.temp)}°C</td> 
+                                    <td>${jsonwe.weather[0].description}</td>
+                                    <td>${jsonwe.main.humidity}%</td>
+                                    <td><img src="https://openweathermap.org/img/w/${jsonwe.weather[0].icon}.png"></td>
+                                    
+                                </tr>
+                                </table>`;
+                
+                //lisätään sisältö div:iin
+                document.getElementById("weatherdata").innerHTML = table;
+                
+            } else if (xmlhttp.readyState == 4 && xmlhttp.status == 404) {
+                alert("Annetuilla hakuehdoilla ei löytynyt tuloksia, tarkista hakusana!")
+            }
+            
+        }
+    });
