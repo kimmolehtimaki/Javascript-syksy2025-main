@@ -27,8 +27,8 @@
         Klikkaa nähdäksesi vastauksen.</p>
     <ul>
         <li>Kehitä ensin sovellus, joka näyttää raakatiedot säästä (lämpötila, pilvisyys, ilmankosteus) tietyssä
-            kaupungissa, kun painiketta klikataan. <button>Hae data</button></li>
-        <li>Kun tämä toimii, parsi data ja tulosta se diviin.</li>
+            kaupungissa, kun painiketta klikataan. <button id="rawBtn" onclick="fetchRawXml()">Hae Ivalon xml-data</button></li>
+        <li>Kun tämä toimii, parsi data ja tulosta se diviin. <button id="parseRaw" onclick="parseRawXml()">Parsi Ivalon data</button></li>
         <li>Tämän jälkeen lisää onchange-tapahtuma pudotusvalikkoon, jotta käyttäjä voi valita, minkä kaupungin tiedot
             näytetään listalta.</li>
         <li>Lopuksi lisää toiminnallisuus syötekenttään, johon käyttäjä voi kirjoittaa hakukyselyn, joka lähetetään
